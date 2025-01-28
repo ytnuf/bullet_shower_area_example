@@ -22,14 +22,14 @@ func _input(event: InputEvent) -> void:
 		position = event.position - Vector2(0, 16)
 
 
-func _on_body_shape_entered(_body_id: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
+func _on_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	# Player got touched by a bullet so sprite changes to sad face.
 	touching += 1
 	if touching >= 1:
 		sprite.frame = 1
 
 
-func _on_body_shape_exited(_body_id: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
+func _on_area_shape_exited(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	touching -= 1
 	# When non of the bullets are touching the player,
 	# sprite changes to happy face.

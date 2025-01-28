@@ -32,12 +32,12 @@ func _ready() -> void:
 		var bullet := Bullet.new()
 		# Give each bullet its own random speed.
 		bullet.speed = randf_range(SPEED_MIN, SPEED_MAX)
-		bullet.body = PhysicsServer2D.body_create()
+		bullet.body = PhysicsServer2D.area_create()
 
-		PhysicsServer2D.body_set_space(bullet.body, get_world_2d().get_space())
-		PhysicsServer2D.body_add_shape(bullet.body, shape)
+		PhysicsServer2D.area_set_space(bullet.body, get_world_2d().get_space())
+		PhysicsServer2D.area_add_shape(bullet.body, shape)
 		# Don't make bullets check collision with other bullets to improve performance.
-		PhysicsServer2D.body_set_collision_mask(bullet.body, 0)
+		PhysicsServer2D.area_set_collision_mask(bullet.body, 0)
 
 		# Place bullets randomly on the viewport and move bullets outside the
 		# play area so that they fade in nicely.
@@ -47,7 +47,7 @@ func _ready() -> void:
 		)
 		var transform2d := Transform2D()
 		transform2d.origin = bullet.position
-		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
+		PhysicsServer2D.area_set_transform(bullet.body, transform2d)
 
 		bullets.push_back(bullet)
 
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			bullet.position.x = offset
 
 		transform2d.origin = bullet.position
-		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
+		PhysicsServer2D.area_set_transform(bullet.body, transform)
 
 
 # Instead of drawing each bullet individually in a script attached to each bullet,
