@@ -36,6 +36,7 @@ func _ready() -> void:
 
 		PhysicsServer2D.area_set_space(bullet.body, get_world_2d().get_space())
 		PhysicsServer2D.area_add_shape(bullet.body, shape)
+		PhysicsServer2D.area_set_monitorable(bullet.body, true)
 		# Don't make bullets check collision with other bullets to improve performance.
 		PhysicsServer2D.area_set_collision_mask(bullet.body, 0)
 
@@ -68,7 +69,7 @@ func _physics_process(delta: float) -> void:
 			bullet.position.x = offset
 
 		transform2d.origin = bullet.position
-		PhysicsServer2D.area_set_transform(bullet.body, transform)
+		PhysicsServer2D.area_set_transform(bullet.body, transform2d)
 
 
 # Instead of drawing each bullet individually in a script attached to each bullet,
